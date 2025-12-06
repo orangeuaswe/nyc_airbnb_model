@@ -1,0 +1,9 @@
+DATA = "../Data/merged_airbnb.csv"
+ARTIFACT_DIR = "artifacts"
+PREPROCESSOR_PATH = f"{ARTIFACT_DIR}/preprocessor.joblib"
+LINEARMODEL_PATH = f"{ARTIFACT_DIR}/lin_reg.joblib"
+RANDFOREST_PATH = f"{ARTIFACT_DIR}/rand_forest.joblib"
+NEURAL_PATH = f"{ARTIFACT_DIR}/neural_net.keras"
+KMEANS_PATH = f"{ARTIFACT_DIR}/kmeans_geo.joblib"
+RANDOM_STATE = 40
+N_CLUSTERS = 20
