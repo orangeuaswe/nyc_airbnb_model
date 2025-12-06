@@ -1,8 +1,8 @@
 ## install dependencies 
 
 run:
-pip install -r reqs.txt
-python -m nltk.downloader vader_lexicon
+1. pip install -r reqs.txt
+2. python -m nltk.downloader vader_lexicon
 
 ## how to train model 
 
