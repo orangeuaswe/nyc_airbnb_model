@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NYC Airbnb Price Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Decorative background layers -->
+  <div class="bg-layer bg-grid"></div>
+  <div class="bg-layer bg-glow bg-glow--left"></div>
+  <div class="bg-layer bg-glow bg-glow--right"></div>
+  <div class="bg-layer bg-skyline"></div>
+
+  <div class="page-shell">
+    <header class="header">
+      <div class="header-top">
+        <div class="header-title-block">
+          <h1 class="app-title">
+            <span class="app-title-main">NYC Airbnb</span>
+            <span class="app-title-sub">Price Predictor</span>
+          </h1>
+          <p class="app-subtitle">
+            Interactive pricing lab for New York rentals — powered by your
+            machine learning models and FastAPI.
+          </p>
+        </div>
+
+        <div class="header-status-block">
+          <div id="api-status" class="status status--unknown">Checking API...</div>
+          <div class="header-chip-row">
+            <span class="chip chip--nyc">NYC · Manhattan · Brooklyn</span>
+            <span class="chip chip--ml">Random Forest · Neural Net</span>
+            <span class="chip chip--api">FastAPI · JSON</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="card card--form">
+        <div class="card-header">
+          <div>
+            <h2>Listing Details</h2>
+            <p class="card-subtitle">
+              Describe the stay you want to host — the model will estimate a
+              fair nightly price based on similar listings across NYC.
+            </p>
+          </div>
+        </div>
+
+        <form id="predict-form" class="form-grid">
+
+          <!-- Borough -->
+          <div class="form-row">
+            <label for="borough">Borough</label>
+            <select id="borough" name="borough" required>
+              <option value="">-- Select borough --</option>
+              <option value="Manhattan">Manhattan</option>
+              <option value="Brooklyn">Brooklyn</option>
+              <option value="Queens">Queens</option>
+              <option value="Bronx">Bronx</option>
+              <option value="Staten Island">Staten Island</option>
+            </select>
+          </div>
+
+          <!-- Room Type -->
+          <div class="form-row">
+            <label for="room_type">Room Type</label>
+            <select id="room_type" name="room_type" required>
+              <option value="">-- Select room type --</option>
+              <option value="Entire home/apt">Entire home/apt</option>
+              <option value="Private room">Private room</option>
+              <option value="Shared room">Shared room</option>
+              <option value="Hotel room">Hotel room</option>
+            </select>
+          </div>
+
+          <!-- Nights + Availability -->
+          <div class="form-row form-row--inline">
+            <div class="form-col">
+              <label for="minimum_nights">Minimum Nights</label>
+              <input
+                type="number"
+                id="minimum_nights"
+                name="minimum_nights"
+                min="1"
+                value="1"
+                required
+              />
+            </div>
+
+            <div class="form-col">
+              <label for="availability_365">Availability (days/yr)</label>
+              <input
+                type="number"
+                id="availability_365"
+                name="availability_365"
+                min="0"
+                max="365"
+                value="180"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Guests -->
+          <div class="form-row">
+            <label for="guests">Guests</label>
+            <input
+              type="number"
+              id="guests"
+              name="guests"
+              min="1"
+              value="1"
+              required
+            />
+          </div>
+
+          <!-- Description -->
+          <div class="form-row form-row--wide">
+            <label for="description">Listing Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              placeholder="Cozy apartment near Central Park with skyline views..."
+            ></textarea>
+            <span class="field-hint">
+              The model reads this text using sentiment analysis — sell your listing!
+            </span>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-actions">
+            <button type="submit" id="submit-btn">Predict Price</button>
+            <p class="tiny-note">
+              Your inputs are sent as JSON to the FastAPI backend and scored by the trained models.
+            </p>
+          </div>
+
+        </form>
+      </section>
+
+      <section class="card card--results" id="result-card">
+        <div class="card-header">
+          <div>
+            <h2>Prediction Result</h2>
+            <p class="card-subtitle">
+              Random forest, linear regression, and a neural network all weigh in —
+              the ensemble picks a final suggested nightly price.
+            </p>
+          </div>
+          <div class="result-meta">
+            <span id="api-url-label" class="result-endpoint"></span>
+          </div>
+        </div>
+
+        <div id="result-content" class="result">
+          <p>
+            No prediction yet. Fill the form on the left and click
+            <strong>Predict Price</strong>.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>NYC Airbnb Model · Data Science</span>
+      <span>FastAPI · Scikit-Learn · TensorFlow · VADER Sentiment</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
